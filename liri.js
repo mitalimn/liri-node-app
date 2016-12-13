@@ -64,9 +64,53 @@ function spotifySong(mySong){
 }
 
 function myMovie(){
+	console.log("======================\n Movie details\n======================");
+    movieArgs = process.argv;
+    var request = require('request');
+    if (process.argv[2] == null) {
+        movieName = "Mr+Nobody";
+        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&r=json";
+        request(queryUrl, function(error, response, body) {
+            // If the request is successful
+            if (!error && response.statusCode === 200) {
+                console.log("Movie Title : " + JSON.parse(body).Title+
+                	"\nRelease Year : " + JSON.parse(body).Year+
+                	 "\nIMDB Rating : " + JSON.parse(body).imdbRating+
+                	 "\nCountry : " + JSON.parse(body).Country+
+                	 "\nLanguage : " + JSON.parse(body).Language+
+                	 "\nPlot : " + JSON.parse(body).Plot+
+                	 "\nActors : " + JSON.parse(body).Actors+
+                	 "\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
+                	 "\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
+            }
+        });
 
+    } else {
+        var movieName = "";
+        for (var i = 2; i < movieArgs.length; i++) {
+            movieName = movieName + " " + movieArgs[i];
+        }
+        // Then run a request to the OMDB API with the movie specified
+        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&r=json";
+
+        request(queryUrl, function(error, response, body) {
+
+            // If the request is successful
+            if (!error && response.statusCode === 200) {
+                console.log("Movie Title : " + JSON.parse(body).Title+
+                	"\nRelease Year : " + JSON.parse(body).Year+
+                	"\nIMDB Rating : " + JSON.parse(body).imdbRating+
+                	"\nCountry : " + JSON.parse(body).Country+
+                	"\nLanguage : " + JSON.parse(body).Language+
+                	"\nPlot : " + JSON.parse(body).Plot+
+                	"\nActors : " + JSON.parse(body).Actors+
+                	"\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
+                	"\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL+"\n");
+            }
+        });
+    }
 }
 
 function doAsSaid(){
-	
+
 }
