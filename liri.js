@@ -3,6 +3,14 @@
 var inquirer = require("inquirer");
 var keys = require('./keys');
 var Twitter = require('twitter');
+var spotify = require('spotify');
+//======== Arguments passed by the user ======
+var actualArgs = "";
+var myArgs = process.argv;
+
+for(i=2; i<myArgs.length;i++){
+	actualArgs = actualArgs + myArgs[i];
+}
 
 inquirer.prompt([{
     type: "list",
@@ -15,7 +23,7 @@ inquirer.prompt([{
             tweet();
             break;
         case "spotify-this-song":
-            spotifySong(mySong);
+            spotifySong(actualArgs);
             break;
         case "movie-this":
             myMovie();
@@ -59,8 +67,25 @@ var client = new Twitter({
 }
 
 
-function spotifySong(mySong){
-
+function spotifySong(song){
+	if(song == ""){
+		song = "The Sign Ace of base";
+	}
+	spotify.search({
+            type: 'track',
+            query: song
+        },
+        function(err, data) {
+            if (err) {
+                console.log("There s an error == spotify!!!! ");
+                console.log(err);
+            } 
+                console.log("\nHere are the Song details\n=====================")
+                console.log("\nArtist Name : " + data.tracks.items[0].artists[0].name
+                +"\nSong name : " + data.tracks.items[0].name
+                +"\nPreview URL : " + data.tracks.items[0].preview_url
+                +"\nAlbum name : " + data.tracks.items[0].album.name +"\n");
+        }); 
 }
 
 function myMovie(){
@@ -73,15 +98,15 @@ function myMovie(){
         request(queryUrl, function(error, response, body) {
             // If the request is successful
             if (!error && response.statusCode === 200) {
-                console.log("Movie Title : " + JSON.parse(body).Title+
-                	"\nRelease Year : " + JSON.parse(body).Year+
-                	 "\nIMDB Rating : " + JSON.parse(body).imdbRating+
-                	 "\nCountry : " + JSON.parse(body).Country+
-                	 "\nLanguage : " + JSON.parse(body).Language+
-                	 "\nPlot : " + JSON.parse(body).Plot+
-                	 "\nActors : " + JSON.parse(body).Actors+
-                	 "\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
-                	 "\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
+                console.log("\nMovie Title : " + JSON.parse(body).Title+
+                	"\n\nRelease Year : " + JSON.parse(body).Year+
+                	 "\n\nIMDB Rating : " + JSON.parse(body).imdbRating+
+                	 "\n\nCountry : " + JSON.parse(body).Country+
+                	 "\n\nLanguage : " + JSON.parse(body).Language+
+                	 "\n\nPlot : " + JSON.parse(body).Plot+
+                	 "\n\nActors : " + JSON.parse(body).Actors+
+                	 "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
+                	 "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
             }
         });
 
@@ -98,14 +123,14 @@ function myMovie(){
             // If the request is successful
             if (!error && response.statusCode === 200) {
                 console.log("Movie Title : " + JSON.parse(body).Title+
-                	"\nRelease Year : " + JSON.parse(body).Year+
-                	"\nIMDB Rating : " + JSON.parse(body).imdbRating+
-                	"\nCountry : " + JSON.parse(body).Country+
-                	"\nLanguage : " + JSON.parse(body).Language+
-                	"\nPlot : " + JSON.parse(body).Plot+
-                	"\nActors : " + JSON.parse(body).Actors+
-                	"\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
-                	"\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL+"\n");
+                	"\n\nRelease Year : " + JSON.parse(body).Year+
+                	"\n\nIMDB Rating : " + JSON.parse(body).imdbRating+
+                	"\n\nCountry : " + JSON.parse(body).Country+
+                	"\n\nLanguage : " + JSON.parse(body).Language+
+                	"\n\nPlot : " + JSON.parse(body).Plot+
+                	"\n\nActors : " + JSON.parse(body).Actors+
+                	"\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
+                	"\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL+"\n");
             }
         });
     }
