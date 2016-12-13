@@ -1,4 +1,3 @@
-
 //npm packages
 var inquirer = require("inquirer");
 var keys = require('./keys');
@@ -8,8 +7,8 @@ var spotify = require('spotify');
 var actualArgs = "";
 var myArgs = process.argv;
 
-for(i=2; i<myArgs.length;i++){
-	actualArgs = actualArgs + myArgs[i];
+for (i = 2; i < myArgs.length; i++) {
+    actualArgs = actualArgs +" " +myArgs[i];
 }
 
 inquirer.prompt([{
@@ -26,7 +25,7 @@ inquirer.prompt([{
             spotifySong(actualArgs);
             break;
         case "movie-this":
-            myMovie();
+            myMovie(actualArgs);
             break;
         case "do-what-it-says":
             doAsSaid();
@@ -38,15 +37,15 @@ inquirer.prompt([{
 
 
 
-function tweet(){
-var client = new Twitter({
-	consumer_key: keys.consumer_key,
-  	consumer_secret: keys.consumer_secret,
-  	access_token_key: keys.access_token_key,
-  	access_token_secret: keys.access_token_secret
-})
+function tweet() {
+    var client = new Twitter({
+        consumer_key: keys.consumer_key,
+        consumer_secret: keys.consumer_secret,
+        access_token_key: keys.access_token_key,
+        access_token_secret: keys.access_token_secret
+    })
 
- var params = {
+    var params = {
         screen_name: 'mitali_mn',
         count: 20
     };
@@ -67,11 +66,11 @@ var client = new Twitter({
 }
 
 
-function spotifySong(song){
-	if(song == ""){
-		song = "The Sign Ace of base";
-	}
-	spotify.search({
+function spotifySong(song) {
+    if (song == "") {
+        song = "The Sign Ace of base";
+    }
+    spotify.search({
             type: 'track',
             query: song
         },
@@ -79,63 +78,37 @@ function spotifySong(song){
             if (err) {
                 console.log("There s an error == spotify!!!! ");
                 console.log(err);
-            } 
-                console.log("\nHere are the Song details\n=====================")
-                console.log("\nArtist Name : " + data.tracks.items[0].artists[0].name
-                +"\nSong name : " + data.tracks.items[0].name
-                +"\nPreview URL : " + data.tracks.items[0].preview_url
-                +"\nAlbum name : " + data.tracks.items[0].album.name +"\n");
-        }); 
+            }
+            console.log("\nHere are the Song details\n=====================")
+            console.log("\nArtist Name : " + data.tracks.items[0].artists[0].name + "\nSong name : " + data.tracks.items[0].name + "\nPreview URL : " + data.tracks.items[0].preview_url + "\nAlbum name : " + data.tracks.items[0].album.name + "\n");
+        });
 }
 
-function myMovie(){
-	console.log("======================\n Movie details\n======================");
-    movieArgs = process.argv;
+function myMovie(movieName) {
+
     var request = require('request');
-    if (process.argv[2] == null) {
+    console.log("======================\n Movie details\n======================");
+
+    if (movieName == "") {
         movieName = "Mr+Nobody";
-        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&r=json";
-        request(queryUrl, function(error, response, body) {
-            // If the request is successful
-            if (!error && response.statusCode === 200) {
-                console.log("\nMovie Title : " + JSON.parse(body).Title+
-                	"\n\nRelease Year : " + JSON.parse(body).Year+
-                	 "\n\nIMDB Rating : " + JSON.parse(body).imdbRating+
-                	 "\n\nCountry : " + JSON.parse(body).Country+
-                	 "\n\nLanguage : " + JSON.parse(body).Language+
-                	 "\n\nPlot : " + JSON.parse(body).Plot+
-                	 "\n\nActors : " + JSON.parse(body).Actors+
-                	 "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
-                	 "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
-            }
-        });
-
-    } else {
-        var movieName = "";
-        for (var i = 2; i < movieArgs.length; i++) {
-            movieName = movieName + " " + movieArgs[i];
-        }
-        // Then run a request to the OMDB API with the movie specified
-        var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&r=json";
-
-        request(queryUrl, function(error, response, body) {
-
-            // If the request is successful
-            if (!error && response.statusCode === 200) {
-                console.log("Movie Title : " + JSON.parse(body).Title+
-                	"\n\nRelease Year : " + JSON.parse(body).Year+
-                	"\n\nIMDB Rating : " + JSON.parse(body).imdbRating+
-                	"\n\nCountry : " + JSON.parse(body).Country+
-                	"\n\nLanguage : " + JSON.parse(body).Language+
-                	"\n\nPlot : " + JSON.parse(body).Plot+
-                	"\n\nActors : " + JSON.parse(body).Actors+
-                	"\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating+
-                	"\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL+"\n");
-            }
-        });
     }
-}
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&r=json";
+    request(queryUrl, function(error, response, body) {
+        // If the request is successful
+        if (!error && response.statusCode === 200) {
+            console.log("\nMovie Title : " + JSON.parse(body).Title +
+                "\n\nRelease Year : " + JSON.parse(body).Year +
+                "\n\nIMDB Rating : " + JSON.parse(body).imdbRating +
+                "\n\nCountry : " + JSON.parse(body).Country +
+                "\n\nLanguage : " + JSON.parse(body).Language +
+                "\n\nPlot : " + JSON.parse(body).Plot +
+                "\n\nActors : " + JSON.parse(body).Actors +
+                "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating +
+                "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
+        } //if 
+    });
+}//function closed
 
-function doAsSaid(){
+function doAsSaid() {
 
 }
