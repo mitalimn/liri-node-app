@@ -3,6 +3,8 @@ var inquirer = require("inquirer");
 var keys = require('./keys');
 var Twitter = require('twitter');
 var spotify = require('spotify');
+
+    var fs = require("fs");
 //======== Arguments passed by the user ======
 var actualArgs = "";
 var myArgs = process.argv;
@@ -60,7 +62,6 @@ function tweet() {
             console.log("\n********Here are my top 20 tweets...!!********\n");
             for (var i = 0; i < 20; i++) {
                 console.log(tweets[i].text);
-
                 console.log("\nCreated At " + tweets[i].created_at + "\n");
                 console.log("==============================");
             }
@@ -99,7 +100,8 @@ function myMovie(movieName) {
     request(queryUrl, function(error, response, body) {
         // If the request is successful
         if (!error && response.statusCode === 200) {
-            console.log("\nMovie Title : " + JSON.parse(body).Title +
+
+        	var dataLog= "\nMovie Title : " + JSON.parse(body).Title +
                 "\n\nRelease Year : " + JSON.parse(body).Year +
                 "\n\nIMDB Rating : " + JSON.parse(body).imdbRating +
                 "\n\nCountry : " + JSON.parse(body).Country +
@@ -107,13 +109,25 @@ function myMovie(movieName) {
                 "\n\nPlot : " + JSON.parse(body).Plot +
                 "\n\nActors : " + JSON.parse(body).Actors +
                 "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating +
-                "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
+                "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n";
+
+
+                console.log(dataLog);
+                logEverything(dataLog);
+            // console.log("\nMovie Title : " + JSON.parse(body).Title +
+            //     "\n\nRelease Year : " + JSON.parse(body).Year +
+            //     "\n\nIMDB Rating : " + JSON.parse(body).imdbRating +
+            //     "\n\nCountry : " + JSON.parse(body).Country +
+            //     "\n\nLanguage : " + JSON.parse(body).Language +
+            //     "\n\nPlot : " + JSON.parse(body).Plot +
+            //     "\n\nActors : " + JSON.parse(body).Actors +
+            //     "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating +
+            //     "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
         } //if 
     });
 } //function closed
 
 function doAsSaid() {
-    var fs = require("fs");
 
     fs.readFile("random.txt", "utf8", function(error, data) {
         if (error) {

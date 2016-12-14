@@ -1,0 +1,18 @@
+
+Movie Title : Finding Nemo
+
+Release Year : 2003
+
+IMDB Rating : 8.2
+
+Country : USA
+
+Language : English
+
+Plot : After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.
+
+Actors : Albert Brooks, Ellen DeGeneres, Alexander Gould, Willem Dafoe
+
+Rotten Tomatoes Rating : 8.7
+
+Rotten Tomatoes URL : http://www.rottentomatoes.com/m/finding_nemo/
