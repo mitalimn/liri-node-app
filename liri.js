@@ -8,7 +8,7 @@ var actualArgs = "";
 var myArgs = process.argv;
 
 for (i = 2; i < myArgs.length; i++) {
-    actualArgs = actualArgs +" " +myArgs[i];
+    actualArgs = actualArgs + " " + myArgs[i];
 }
 
 inquirer.prompt([{
@@ -17,6 +17,8 @@ inquirer.prompt([{
     message: "Hi, Im Liri , How can I help you??",
     choices: ["my-tweets", "spotify-this-song", "movie-this", "do-what-it-says"]
 }]).then(function(choices) {
+
+
     switch (choices.doWhat) {
         case "my-tweets":
             tweet();
@@ -33,6 +35,7 @@ inquirer.prompt([{
         default:
             console.log("Please Select from the options- my-tweets, spotify-this-song, movie-this, do-what-it-says");
     }
+
 });
 
 
@@ -107,8 +110,44 @@ function myMovie(movieName) {
                 "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
         } //if 
     });
-}//function closed
+} //function closed
 
 function doAsSaid() {
+    var fs = require("fs");
 
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            console.log(error);
+        } else {
+            var myArray = data.split(",");
+            // 	console.log(myArray[0]);
+            // 	console.log(myArray[1]);
+            var myString = myArray[1];
+            myString = myString[1].substring(1, myString[1].length - 1);
+
+            switch (myArray[0]) {
+                case "spotify-this-song":
+                    spotifySong(myArray[1]);
+                    break;
+                case "movie-this":
+                    myMovie(myArray[1]);
+                    break;
+                case "my-tweets":
+                    tweet();
+                    break;
+                default:
+                    console.log("send proper comments in the file");
+            }
+        }
+    });
+}
+
+
+function logEverything(logData){
+	fs.appendFile("log.txt", logData , function(err){
+		if(err){
+			console.log("Error in writing file "+err);
+		}
+		console.log("File updated in log.txt")
+	} );
 }
