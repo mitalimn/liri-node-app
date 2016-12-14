@@ -40,8 +40,6 @@ inquirer.prompt([{
 
 });
 
-
-
 function tweet() {
     var client = new Twitter({
         consumer_key: keys.consumer_key,
@@ -61,10 +59,12 @@ function tweet() {
         } else {
             console.log("\n********Here are my top 20 tweets...!!********\n");
             for (var i = 0; i < 20; i++) {
-                console.log(tweets[i].text);
-                console.log("\nCreated At " + tweets[i].created_at + "\n");
-                console.log("==============================");
+            	var tweetData = tweets[i].text+ "\nCreated At "
+                 + tweets[i].created_at + "\n";
+                console.log(tweetData);
+                console.log("==============================");      
             }
+            logEverything(tweetData);
         }
     });
 }
@@ -84,7 +84,13 @@ function spotifySong(song) {
                 console.log(err);
             }
             console.log("\nHere are the Song details\n=====================")
-            console.log("\nArtist Name : " + data.tracks.items[0].artists[0].name + "\nSong name : " + data.tracks.items[0].name + "\nPreview URL : " + data.tracks.items[0].preview_url + "\nAlbum name : " + data.tracks.items[0].album.name + "\n");
+
+            var spotifyData = "\nArtist Name : " + data.tracks.items[0].artists[0].name 
+            	+ "\nSong name : " + data.tracks.items[0].name
+            	 + "\nPreview URL : " + data.tracks.items[0].preview_url 
+            	 + "\nAlbum name : " + data.tracks.items[0].album.name + "\n";
+            console.log(spotifyData);
+            logEverything(spotifyData);
         });
 }
 
@@ -111,18 +117,8 @@ function myMovie(movieName) {
                 "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating +
                 "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n";
 
-
                 console.log(dataLog);
-                logEverything(dataLog);
-            // console.log("\nMovie Title : " + JSON.parse(body).Title +
-            //     "\n\nRelease Year : " + JSON.parse(body).Year +
-            //     "\n\nIMDB Rating : " + JSON.parse(body).imdbRating +
-            //     "\n\nCountry : " + JSON.parse(body).Country +
-            //     "\n\nLanguage : " + JSON.parse(body).Language +
-            //     "\n\nPlot : " + JSON.parse(body).Plot +
-            //     "\n\nActors : " + JSON.parse(body).Actors +
-            //     "\n\nRotten Tomatoes Rating : " + JSON.parse(body).tomatoRating +
-            //     "\n\nRotten Tomatoes URL : " + JSON.parse(body).tomatoURL + "\n");
+                logEverything(dataLog);          
         } //if 
     });
 } //function closed
@@ -162,6 +158,6 @@ function logEverything(logData){
 		if(err){
 			console.log("Error in writing file "+err);
 		}
-		console.log("File updated in log.txt")
+		console.log("File updated in log.txt");
 	} );
 }

@@ -1,18 +1,33 @@
 
-Movie Title : Finding Nemo
+Artist Name : Ace of Base
+Song name : The Sign
+Preview URL : https://p.scdn.co/mp3-preview/177e65fc2b8babeaf9266c0ad2a1cb1e18730ae4?cid=null
+Album name : The Sign (US Album) [Remastered]
 
-Release Year : 2003
+Artist Name : Backstreet Boys
+Song name : I Want It That Way
+Preview URL : https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=null
+Album name : The Hits--Chapter One
 
-IMDB Rating : 8.2
+Artist Name : Backstreet Boys
+Song name : I Want It That Way
+Preview URL : https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=null
+Album name : The Hits--Chapter One
 
-Country : USA
+Movie Title : Mr. Nobody
 
-Language : English
+Release Year : 2009
 
-Plot : After his son is captured in the Great Barrier Reef and taken to Sydney, a timid clownfish sets out on a journey to bring him home.
+IMDB Rating : 7.9
 
-Actors : Albert Brooks, Ellen DeGeneres, Alexander Gould, Willem Dafoe
+Country : Belgium, Germany, Canada, France
 
-Rotten Tomatoes Rating : 8.7
+Language : English, Mohawk
 
-Rotten Tomatoes URL : http://www.rottentomatoes.com/m/finding_nemo/
+Plot : A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
+
+Actors : Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
+
+Rotten Tomatoes Rating : 6.6
+
+Rotten Tomatoes URL : http://www.rottentomatoes.com/m/mr-nobody/
